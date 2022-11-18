@@ -15,29 +15,37 @@
 int main(){
 
     char matriz [3][3];
-    int vez = 1;
-    
-    preencherMatriz(matriz);
-    
+    char **mat;
+    int vezJogador = 1;
+    int flag;
+    int vzsJogadas = 0;
+    int linha, coluna;
+    int *row, *col;
 
-    char flag;
-    int vzsJogadas = 0, linha, coluna;
+    mat = malloc(3 * sizeof(char*));
+    for (int i = 0; i < 3; i++)
+    {
+        mat[i] = malloc(3 * sizeof(char));
+    }
+    
+    preencherMatriz(mat);
+    mostrarMatriz(mat);
+
+    row = &linha;
+    col = &coluna;
+
     do{
-        vzsJogadas =1;
-        do{
-            mostrarMatriz(matriz);
-            printf("Digite a linha:\n");
-            scanf("%d", linha);
-            printf("Digite a coluna:\n");
-            scanf("%d", coluna);
-            verificaInvalidez(linha,coluna,&matriz);
-            
-        }while (vzsJogadas <=9);
-                
-        printf("deseja jogar novamente? [s][n]\n");
-        scanf("%c", &flag);
-    }while(flag = 's');
-    //pegarCoordenadas(vez, &matriz);
+        pegarPonto(row, col);
+        
+        flag = verificarPonto(row, col, mat);
+        if(flag < 2){
+            printf("coordenada invalida, digite novamente \n");
+        }
+    }while(flag < 2);
+
+    mudarMatriz(row, col, mat);
+    mostrarMatriz(mat);
+    
     
     
     
