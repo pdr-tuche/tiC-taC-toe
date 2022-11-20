@@ -68,7 +68,7 @@ int verificarPonto (int *a, int *b, char **mat){
 }
 
 int verificarVencedor(char **m){
-    //linhas
+        //linhas
     if(m[0][0] == 'X' && m[0][1] == 'X' && m[0][2] == 'X'){return 1;}
     if(m[1][0] == 'X' && m[1][1] == 'X' && m[1][2] == 'X'){return 1;}
     if(m[2][0] == 'X' && m[2][1] == 'X' && m[2][2] == 'X'){return 1;}
@@ -95,4 +95,77 @@ int verificarVencedor(char **m){
     if(m[0][2] == 'O' && m[1][1] == 'O' && m[2][0] == 'O'){return 2;}
     
     return 0;
+}
+
+void tictactoe(){
+    char **matriz;
+    int vezJogador = 1;
+    int flagDeErros;
+    int vencedor =0;
+    int vzsJogadas = 0;
+    int linha, coluna;
+    int *row, *col;
+
+    matriz = malloc(3 * sizeof(char*));
+    for (int i = 0; i < 3; i++)
+    {
+        matriz[i] = malloc(3 * sizeof(char));
+    }
+    
+    preencherMatriz(matriz);
+    mostrarMatriz(matriz);
+
+    row = &linha;
+    col = &coluna;
+
+    do{
+        printf("\nvez do jogador %d\n", vezJogador);
+        do{
+            pegarPonto(row, col);
+            
+            flagDeErros = verificarPonto(row, col, matriz);
+            if(flagDeErros > 0){
+                printf("coordenada invalida, digite novamente \n");
+            }
+        }while(flagDeErros != 0);
+
+        mudarMatriz(row, col, matriz, vezJogador);
+        system("cls");
+        mostrarMatriz(matriz);
+        if(vezJogador == 1){
+            vezJogador = 2;
+        }else{
+            vezJogador = 1;
+        }
+
+        vencedor = verificarVencedor(matriz);
+        if(vencedor != 0){
+            printf("\n O JOGADOR %d E O VENCEDOR !!! \n", vencedor);
+            break;
+        }
+        
+        vzsJogadas++;
+        if(vzsJogadas >= 9){
+            printf("DEU VELHA !");
+        }
+    }while (vzsJogadas < 9);
+}
+
+int menu(){
+    int option = 0;
+    printf("_______________________________________________________________________________________\n");
+    printf("|                                                                                     |\n");
+    printf("|  sssssssss d   sSSs.      sss sssss d s.     sSSs.      sss sssss   sSSSs   d sss   |\n");
+    printf("|      S     S  S               S     S  ~O   S               S      S     S  S       |\n");
+    printf("|      S     S S                S     S   `b S                S     S       S S       |\n");
+    printf("|      S     S S                S     S sSSO S                S     S       S S sSSs  |\n");
+    printf("|      S     S S                S     S    O S                S     S       S S       |\n");
+    printf("|      S     S  S               S     S    O  S               S      S     S  S       |\n");
+    printf("|      P     P   sss            P     P    P   sss            P        sss    P sSSss |\n");
+    printf("_______________________________________________________________________________________\n");
+    printf("|                                                                                     |\n");
+    printf("|               1 - play    2 - Ranking    3 - See Credits    0 - Exit                |\n");
+    printf("|_____________________________________________________________________________________|\n");
+    scanf("%d", &option);
+    return option;
 }
