@@ -98,6 +98,8 @@ int verificarVencedor(char **m){
 }
 
 void tictactoe(){
+    int goBackFlag = 0;
+
     char **matriz;
     int vezJogador = 1;
     int flagDeErros;
@@ -149,6 +151,8 @@ void tictactoe(){
             printf("DEU VELHA !");
         }
     }while (vzsJogadas < 9);
+
+    goBack(goBackFlag);
 }
 
 int menu(){
@@ -166,6 +170,31 @@ int menu(){
     printf("|                                                                                     |\n");
     printf("|               1 - play    2 - Ranking    3 - See Credits    0 - Exit                |\n");
     printf("|_____________________________________________________________________________________|\n");
+    printf("option: ");
     scanf("%d", &option);
     return option;
+}
+
+void credits(){
+    int goBackFlag=0;
+    printf("____________________________________________________\n");
+    printf("|                                                   |\n");
+    printf("|               Developed by Tucha.                 |\n");
+    printf("|                  follow me on:                    |\n");
+    printf("|               GitHub: @pdr-tuche                  |\n");
+    printf("|               twitter: @pdrtuche                  |\n");
+    printf("|________________________________________1 - menu___|\n");
+    scanf("%d", &goBackFlag);
+    goBack(goBackFlag);   
+}
+
+void goBack(int flag){
+    while(flag != 1){
+        printf("digite 1 para ir ao menu\n");
+        scanf("%d", &flag);
+        if (flag == 1)
+        {
+            main();
+        }
+    }
 }

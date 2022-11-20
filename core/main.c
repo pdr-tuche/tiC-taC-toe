@@ -18,11 +18,15 @@ int main(){
     switch (menu())
     {
     case 1:
+        system("cls");
         tictactoe();
         break;
-    
+    case 3:
+        system("cls");
+        credits();
+        break;
     default:
-        printf("caiu no default");
+        printf("See ya! ^^");
         break;
     }
 
