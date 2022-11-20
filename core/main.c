@@ -21,6 +21,10 @@ int main(){
         system("cls");
         tictactoe();
         break;
+
+    case 2:
+        printf("aqui eu exibo o arquivo com os nomes de jogadores e quantas vezes ganharam");
+        break;
     case 3:
         system("cls");
         credits();
