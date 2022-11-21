@@ -1,5 +1,11 @@
 #include <stdio.h>
 
+struct jogador
+{
+    int id;
+    char nome [20];
+}s_player;
+
 void preencherMatriz (char **m){
     for (int i = 0; i < 3; i++)
     {
@@ -97,7 +103,7 @@ int verificarVencedor(char **m){
     return 0;
 }
 
-void tictactoe(){
+int tictactoe(){
     int goBackFlag = 0;
 
     char **matriz;
@@ -147,12 +153,9 @@ void tictactoe(){
         }
         
         vzsJogadas++;
-        if(vzsJogadas >= 9){
-            printf("DEU VELHA !");
-        }
     }while (vzsJogadas < 9);
 
-    goBack(goBackFlag);
+    return vencedor;
 }
 
 int menu(){
@@ -189,6 +192,8 @@ void credits(){
 }
 
 void goBack(int flag){
+    if(flag == 1)
+        main();
     while(flag != 1){
         printf("digite 1 para ir ao menu\n");
         scanf("%d", &flag);
@@ -197,4 +202,44 @@ void goBack(int flag){
             main();
         }
     }
+}
+
+void gravarNomeVencedor(char vencedor[20]){
+    FILE *f;
+    f = fopen("vencedores.txt", "a+");
+    if (f == NULL) {
+        printf("erro na abertura do arquivo\n");
+        system("pause");
+        exit(1);
+    }
+
+    int res = fputs(vencedor, f);
+    fputc('\n', f);
+    if (res == EOF)
+        printf("erro na gravaçao\n");
+
+    fclose(f);
+}
+
+void verVencedores(){
+    int goBackFlag =0;
+    FILE *arq;
+    arq = fopen("vencedores.txt", "r");
+    if (arq == NULL) {
+        printf("erro na abertura\n");
+        system("pause");
+        exit(1);
+    }
+
+    printf("ULTIMOS VENCEDORES:\n");
+    char c = fgetc(arq);
+    while (c != EOF) {
+        printf("%c", c);
+        c = fgetc(arq);
+    }
+    fclose(arq);
+
+    printf("digite 1 para voltar ao menu\n");
+    scanf("%d", &goBackFlag);
+    goBack(goBackFlag);
 }
