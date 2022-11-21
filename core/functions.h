@@ -1,5 +1,6 @@
 #include <stdio.h>
-
+#include <stdlib.h>
+#include<time.h>
 struct jogador
 {
     int id;
@@ -273,4 +274,83 @@ void initTicTacToe(){
     printf("digite 1 para voltar ao menu\n");
     scanf("%d", &goBackFlag);
     goBack(goBackFlag);
+}
+
+int setSinglePlayer(){
+    int opcao;
+    printf("1 - Um jogador\n2 - Dois jogadores\nopcao: ");
+    scanf("%d", &opcao);
+    if(opcao == 1 || opcao == 2){
+        return opcao;
+    }else{
+        system("cls");
+        printf("valor invalido, digite novamente a opçao\n");
+        setSinglePlayer();
+    }
+}
+
+int coordenadaAleatoria(){   
+  srand(time(NULL));
+  return rand() % 3;
+}
+
+void initTicTacToeSinglePlayer(){
+    int goBackFlag = 0;
+
+    char **matriz;
+    int vezJogador = 1;
+    int flagDeErros;
+    int vencedor =0;
+    int vzsJogadas = 0;
+    int linha, coluna;
+    int *row, *col;
+
+    matriz = malloc(3 * sizeof(char*));
+    for (int i = 0; i < 3; i++)
+    {
+        matriz[i] = malloc(3 * sizeof(char));
+    }
+    
+    preencherMatriz(matriz);
+    mostrarMatriz(matriz);
+
+    row = &linha;
+    col = &coluna;
+
+    do{
+        printf("\nvez do jogador %d\n", vezJogador);
+        do{
+            if(vezJogador == 2){
+                linha = coordenadaAleatoria();
+                coluna = coordenadaAleatoria();    
+                flagDeErros = verificarPonto(row, col, matriz);
+            }else{
+                pegarPonto(row, col);
+            
+                flagDeErros = verificarPonto(row, col, matriz);
+                if(flagDeErros > 0){
+                    printf("coordenada invalida, digite novamente \n");
+                }
+            }
+        }while(flagDeErros != 0);
+
+        mudarMatriz(row, col, matriz, vezJogador);
+        system("cls");
+        mostrarMatriz(matriz);
+        if(vezJogador == 1){
+            vezJogador = 2;
+        }else{
+            vezJogador = 1;
+        }
+
+        vencedor = verificarVencedor(matriz);
+        if(vencedor != 0){
+            printf("\n O JOGADOR %d E O VENCEDOR !!! \n", vencedor);
+            break;
+        }
+        
+        vzsJogadas++;
+    }while (vzsJogadas < 9);
+
+        
 }

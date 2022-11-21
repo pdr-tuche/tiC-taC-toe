@@ -19,7 +19,12 @@ int main(){
     {
     case 1:
         system("cls");
-        initTicTacToe();
+        int single= setSinglePlayer();
+        if(single == 1){
+            initTicTacToeSinglePlayer();
+        }else if(single == 2){
+            initTicTacToe();
+        }
         break;
     case 2:
         system("cls");
