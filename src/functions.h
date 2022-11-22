@@ -352,5 +352,7 @@ void initTicTacToeSinglePlayer(){
         vzsJogadas++;
     }while (vzsJogadas < 9);
 
-        
+    printf("digite 1 para voltar ao menu: ");
+    scanf("%d", &goBackFlag);
+    goBack(goBackFlag);
 }
