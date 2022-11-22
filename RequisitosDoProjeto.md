@@ -1,7 +1,7 @@
 Jogo da velha (3X3 OU 4X4);
 
 - [x] a) Apenas um tabuleiro 3x3 (ou 5x5)
-- [x] b) Caso não exista o segundo jogador, o computador deve assumir a posição dooponente;
+- [x] b) Caso não exista o segundo jogador, o computador deve assumir a posição do oponente;
 - [x] c) Ranking em arquivo;
 - [x] d) Deve haver menu com opções de Jogar, Ver Ranking, Créditos e Sair;
 - [x] e) Utilize matriz com alocação dinâmica;
