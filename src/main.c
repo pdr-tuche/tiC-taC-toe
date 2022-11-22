@@ -11,12 +11,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "functions.h"
 
 int main(){
 
     switch (menu())
     {
+    case 0:
+        printf("See ya! ^^");
+        break;
     case 1:
         system("cls");
         int single= setSinglePlayer();
@@ -35,9 +39,9 @@ int main(){
         credits();
         break;
     default:
-        printf("See ya! ^^");
-        break;
+        printf("opcao invalida, digite novamente em alguns segundos\n");
+        sleep(2);
+        main();
     }
-
     return 0;
 }
