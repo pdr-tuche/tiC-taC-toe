@@ -3,7 +3,9 @@
 
 **Requisitos do projeto pode ser encontrado no arquivo [`RequisitosDoProjeto.md`](RequisitosDoProjeto.md)**
 
-## Requisitos:
+**O relatorio do projeto é um Readme mais detalhado onde pode ser encontrado no arquivo [`Relatorio.md`](Relatorio.md)**
+
+## Requisitos para executar:
   * Windows
   * [gcc](https://gcc.gnu.org/)
 
